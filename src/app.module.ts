@@ -5,6 +5,7 @@ import { Joke } from './jokes/joke.entity';
 import { JokeType } from './joke-types/joke-type.entity';
 import * as dotenv from 'dotenv';
 import { JokeTypesModule } from './joke-types/joke-type.module';
+import { AuthModule } from './authentication/auth.module';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ dotenv.config();
     }),
     JokesModule,
     JokeTypesModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
