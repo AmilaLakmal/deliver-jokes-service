@@ -13,15 +13,30 @@ export class JokeService {
     private readonly jokeTypeRepository: Repository<JokeType>,
   ) {}
 
-  async getRandomJoke() {
-    const jokes = await this.jokeRepository.find({
-      relations: ['type'],
-    });
+  async getRandomJoke(typeId: string) {
+    try {
+      const jokes = await this.jokeRepository.find({
+        where: { type: { id: typeId } },
+        relations: ['type'],
+      });
 
-    if (jokes.length === 0) {
-      throw new Error('No jokes available');
+      if (jokes.length === 0) {
+        return {
+          success: false,
+          error: 'No jokes available',
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Joke fetched successfully',
+        data: jokes[Math.floor(Math.random() * jokes.length)],
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error?.message ?? 'Internal server error occured',
+      };
     }
-
-    return jokes[Math.floor(Math.random() * jokes.length)];
   }
 }
