@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Joke } from './jokes/joke.entity';
 import { JokeType } from './joke-types/joke-type.entity';
 import * as dotenv from 'dotenv';
+import { JokeTypesModule } from './joke-types/joke-type.module';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ dotenv.config();
       logging: true,
     }),
     JokesModule,
+    JokeTypesModule,
   ],
 })
 export class AppModule {}
