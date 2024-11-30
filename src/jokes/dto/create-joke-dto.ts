@@ -5,6 +5,7 @@ export class CreateJokeDto {
   @IsNotEmpty()
   content: string;
 
-  @IsInt()
-  typeId: number;
+  @IsString()
+  @IsNotEmpty()
+  type: string;
 }
